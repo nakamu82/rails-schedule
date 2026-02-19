@@ -1,0 +1,43 @@
+<%if @post %>
+  <div class="card" style="width:24rem;">
+    <h5 class="card-title">スケジュール詳細</h5>
+    
+    <div class="border rounded m-1 p-3">
+      <p class="card-text">タイトル</p>
+      <%= @post.title %>
+    </div>
+  
+    <div class="border rounded m-1 p-3">
+      <p class="card-text">開始日</p>
+      <%= @post.start_time.strftime("%Y/%m/%d") %>
+    </div>
+
+    <div class="border rounded m-1 p-3">
+      <p class="card-text">終了日</p>
+      <%= @post.end_time.strftime("%Y/%m/%d") %>
+    </div>
+
+    <div class="border rounded m-1 p-3">
+      <p class="card-text">終日</p>
+      <%= @post.all_day? ? "〇" : "" %>
+    </div>
+
+    <div class="border rounded m-1 p-3">
+      <p class="card-text">スケジュールメモ</p>
+      <%= @post.content %>
+    </div>
+  
+    <div class="posts-time">
+      <p>　更新日時　<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+    </div>
+  </div>
+
+  <% else %>
+    <p>投稿が見つかりませんでした</p>
+  <% end %>
+
+<div class="mt-3">
+  <%= link_to "編集", "/posts/#{@post.id}/edit", class: "btn btn-success me-2" %>
+  <%= link_to "削除", "/posts/#{@post.id}", method: :delete, data:{confirm:"予定を削除しますか？"}, class: "btn btn-danger" %>
+</div>
+
