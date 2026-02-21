@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root "posts#index"
+  resources :posts
+end
+  #RESTful ルーティングはresources :posts
+  #resources :postsだけで全部やってくれる
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  #get "posts/new" =>"posts#new"
 
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  #post "posts/create" =>"posts#create"
+
+  #posts/:idはposts/indexより下に書く
+  
+  #get "posts/:id/edit" => "posts#edit"
+  #post "posts/:id/update" =>"posts#update"
+  #post "posts/:id/destroy" =>"posts#destroy"
+  
+  #get "posts/:id" =>"posts#show"
 
   # Defines the root path route ("/")
   # root "posts#index"
-end
+  
+  #コントローラ名は複数形

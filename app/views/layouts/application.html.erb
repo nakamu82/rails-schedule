@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Schedule" %></title>
+    <title>Schedule</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
+    <meta name="apple-mobile-web-app-capable" content="yes">   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <%= csrf_meta_tags %> 
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
+    </head>
+
+   <%# パーシャルの使いどころを調べる %>
 
   <body>
-    <%= yield %>
+    <header class = "m-4">
+      <h1>SCHEDULE</h1>
+      <p class="text-end">　本日の日付　<%=Time.zone.today.strftime("%Y/%m/%d") %></p>
+    
+      <% if flash[:notice] %>
+       <div class="alert alert-warning"><%= flash[:notice] %></div>
+      <% end %>
+      
+     <% if defined?(@post) && @post.errors.any? %>
+     <% @post.errors.full_messages.each do |message| %>
+     <p><%= message %></p>
+      <% end %>
+
+      
+    <% end %>
+
+   </header>
+
+   <main>
+     <%= yield %>
+    </main>
+
+    <footer class= "mt-4">
+      <%=link_to"戻る","/posts", class: "btn btn-secondary" %>
+    </footer>
+
   </body>
 </html>
+
+
