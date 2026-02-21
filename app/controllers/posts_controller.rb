@@ -10,7 +10,6 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-       #@post = Post.new(content:params[:content],title:params[:title],start_time:params[:start_time],end_time:params[:end_time])
     if @post.save
       flash[:notice] = "スケジュールを登録しました"
       redirect_to("/posts")     
@@ -60,7 +59,5 @@ class PostsController < ApplicationController
   def post_params
   params.require(:post).permit(:title, :content, :start_time, :end_time, :all_day)
   end
-
-
-
+  
 end
